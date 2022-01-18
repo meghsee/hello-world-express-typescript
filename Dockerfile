@@ -7,7 +7,7 @@ FROM node:16 AS BUILD_IMAGE
 # Create app directory
 WORKDIR /app
 
-# Copy all the files in the current folder to the folder named in WORDIR, "/project"
+# Copy all the files in the current folder to the folder named in WORDIR, "/app"
 COPY . .
 
 # Install the libraries we need to build our Node.js express application
@@ -23,13 +23,13 @@ RUN npm run build
 #RUN /usr/local/bin/node-prune
 
 # we will use alpine image, alpine is a lean docker image with minimum packages but enough to run node applications.
-FROM node:16-alpine
+# FROM node:16-alpine
 
-WORKDIR /app
+# WORKDIR /app
 
 # copy from build image
-COPY --from=BUILD_IMAGE /app/dist ./dist
-COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
+#COPY --from=BUILD_IMAGE /app/dist ./dist
+#COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
 
 
 # Define an environment variable named PORT
